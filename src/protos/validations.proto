@@ -1,0 +1,45 @@
+syntax = "proto3";
+
+package validations;
+
+message LedgerRequest {
+  uint32 ledger_index = 1;
+}
+
+message LedgerRangeRequest {
+  uint32 ledger_index_min = 1;
+  uint32 ledger_index_max = 2;
+}
+
+message MasterKeyRequest {
+  string master_key = 1;
+}
+
+message ValidationResponse {
+  string cookie = 1;
+  string type = 2;
+  uint32 flags = 3;
+  bool full = 4;
+  string ledger_hash = 5;
+  uint32 ledger_index = 6;
+  string master_key = 7;
+  string signature = 8;
+  uint32 signing_time = 9;
+  string validated_hash = 10;
+  string validation_public_key = 11;
+
+  reserved 12, 13, 14, 15;
+
+  string server_version = 16;
+  int32 base_fee = 17;
+  int32 load_fee = 18;
+  uint32 reserve_base = 19;
+  uint32 reserve_inc = 20;
+}
+
+service Validations {
+  rpc GetValidation(LedgerRequest) returns (ValidationResponse) {};
+  rpc GetValidationsByLedger(LedgerRequest) returns (stream ValidationResponse) {};
+  rpc GetValidationsByLedgerRange(LedgerRangeRequest) returns (stream ValidationResponse) {};
+  rpc GetValidationsByMasterKey(MasterKeyRequest) returns (stream ValidationResponse) {};
+}

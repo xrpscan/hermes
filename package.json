@@ -1,0 +1,45 @@
+{
+  "name": "xrplvms",
+  "version": "0.1.0",
+  "description": "XRPL Validation Message Service",
+  "main": "index.js",
+  "author": "Anurag",
+  "license": "MIT",
+  "dependencies": {
+    "@grpc/grpc-js": "^1.6.7",
+    "@grpc/proto-loader": "^0.6.13",
+    "chalk": "^4.1.2",
+    "cli-table3": "^0.6.2",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "grpc-tools": "^1.11.2",
+    "mongoose": "^6.4.4",
+    "morgan": "^1.10.0",
+    "node-fetch": "^2.6.7",
+    "selfsigned": "^2.0.1",
+    "xrpl": "^2.3.1",
+    "yargs": "^17.5.1"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.13",
+    "@types/node": "^18.0.3",
+    "@types/node-fetch": "^2.6.2",
+    "@types/yargs": "^17.0.10",
+    "@typescript-eslint/eslint-plugin": "^5.30.6",
+    "@typescript-eslint/parser": "^5.30.6",
+    "concurrently": "^7.2.2",
+    "eslint": "^8.19.0",
+    "grpc_tools_node_protoc_ts": "^5.3.2",
+    "nodemon": "^2.0.19",
+    "typescript": "^4.7.4"
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "build": "yarn proto:build && yarn tsc",
+    "start": "node dist/index.js",
+    "proto:build": "./bin/build-protos.sh",
+    "dev": "concurrently 'yarn proto:build' 'yarn tsc --watch' 'nodemon -q dist/index.js' ",
+    "peer": "node dist/cmd/peer/index.js",
+    "keypair": "node dist/cmd/keypair/index.js"
+  }
+}
