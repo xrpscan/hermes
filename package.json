@@ -1,7 +1,7 @@
 {
-  "name": "xrplvms",
+  "name": "hermes",
   "version": "0.1.0",
-  "description": "XRPL Validation Message Service",
+  "description": "Project Hermes: XRPL Validation message service",
   "main": "index.js",
   "author": "Anurag",
   "license": "MIT",

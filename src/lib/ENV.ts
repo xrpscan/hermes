@@ -41,7 +41,7 @@ class ENV {
     return process.env.MONGODB_PORT ? Number(process.env.MONGODB_PORT) : 27017
   }
   public static get MONGODB_DATABASE(): string {
-    return process.env.MONGODB_DATABASE || 'xrplvms_dev'
+    return process.env.MONGODB_DATABASE || 'hermes_prod'
   }
   public static get RIPPLED_URL(): string {
     return process.env.RIPPLED_URL || 'wss://xrplcluster.com'
