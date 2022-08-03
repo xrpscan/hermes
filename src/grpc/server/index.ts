@@ -10,6 +10,7 @@ import {
  } from './ValidationRequest'
  import { ping } from './PingRequest'
  import ENV from '../../lib/ENV'
+ import logger from '../../logger'
 
 export const startgRPCServer = () => {
   const server = new grpc.Server()
@@ -25,10 +26,10 @@ export const startgRPCServer = () => {
     credentials,
     (error, port) => {
       if (error) {
-        console.error("Error: " + error.message)
+        logger.error('[gRPC]', error.message)
       } else {
         server.start()
-        console.log(`[gRPC] ${credentials._isSecure() ? chalk.green('Secure') : chalk.red('Insecure')} service started on ${ENV.SERVER_HOSTNAME}:${port}`)
+        logger.info('[gRPC]', `${credentials._isSecure() ? chalk.green('Secure') : chalk.red('Insecure')} service started on ${ENV.SERVER_HOSTNAME}:${port}`)
       }
     })
 }

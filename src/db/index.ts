@@ -1,15 +1,16 @@
 import mongoose from 'mongoose'
 import ENV from '../lib/ENV'
+import logger from '../logger'
 
 // Initialize db connection
 export const connectDatabase = () => {
   const mongodbURI = `mongodb://${ENV.MONGODB_HOST}:${ENV.MONGODB_PORT}/${ENV.MONGODB_DATABASE}`
   const db = mongoose.connect(mongodbURI)
   .then((connection) => {
-    console.log('[mongod]', 'Connected to mongodb: ', mongodbURI)
+    logger.info('[mongod]', 'Connected: %s', mongodbURI)
   })
   .catch((error) => {
-    console.error('[mongod]', 'Error connecting to mongodb: ', error.message)
+    logger.error('[mongod]', 'Error connecting to : ', error.message)
   })
 }
 

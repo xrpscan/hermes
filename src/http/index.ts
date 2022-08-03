@@ -9,6 +9,7 @@ import PeerController from '../controllers/PeerController'
 import ServerController from '../controllers/ServerController'
 import PingController from '../controllers/PingController'
 import ENV from '../lib/ENV'
+import logger from '../logger'
 
 export const startExpressServer = () => {
   const app: Express = express()
@@ -37,13 +38,13 @@ export const startExpressServer = () => {
     const tlsserver = https
     .createServer(options, app)
     .listen(ENV.SERVER_REST_PORT, () => {
-      console.log('[REST]', `${chalk.green('Secure')} service started on https://${ENV.SERVER_HOSTNAME}:${ENV.SERVER_REST_PORT}`)
+      logger.info('[REST]', `${chalk.green('Secure')} service started on https://${ENV.SERVER_HOSTNAME}:${ENV.SERVER_REST_PORT}`)
     })
   } else {
     const httpserver = http
     .createServer({}, app)
     .listen(ENV.SERVER_REST_PORT, () => {
-      console.log('[REST]', `${chalk.red('Insecure')} service started on http://${ENV.SERVER_HOSTNAME}:${ENV.SERVER_REST_PORT}`)
+      logger.info('[REST]', `${chalk.red('Insecure')} service started on http://${ENV.SERVER_HOSTNAME}:${ENV.SERVER_REST_PORT}`)
     })
   }
 }
