@@ -4,6 +4,29 @@ class ENV {
   public static get INGRESS_ENABLED(): boolean {
     return process.env.INGRESS_ENABLED === 'true' ? true : false
   }
+  public static get PEERSYNC_ENABLED(): boolean {
+    return process.env.PEERSYNC_ENABLED === 'true' ? true : false
+  }
+  public static get PEERSYNC_POLL_INTERVAL(): number {
+    if (process.env.PEERSYNC_POLL_INTERVAL) {
+      if (Number(process.env.PEERSYNC_POLL_INTERVAL) < 600) {
+        return 600
+      } else {
+        return Number(process.env.PEERSYNC_POLL_INTERVAL)
+      }
+    } else {
+      return 3600
+    }
+  }
+  public static get PEERSYNC_POLL_INTERVAL_MS(): number {
+    return this.PEERSYNC_POLL_INTERVAL * 1000
+  }
+  public static get PEERSYNC_FETCH_DEPTH(): number {
+    return process.env.PEERSYNC_FETCH_DEPTH ? Number(process.env.PEERSYNC_FETCH_DEPTH) : 24000
+  }
+  public static get PEER_PRIVATE(): boolean {
+    return process.env.PEER_PRIVATE === 'true' ? true : false
+  }
   public static get SERVER_HOSTNAME(): string {
     return process.env.SERVER_HOSTNAME || 'localhost'
   }
@@ -45,12 +68,6 @@ class ENV {
   }
   public static get RIPPLED_URL(): string {
     return process.env.RIPPLED_URL || 'wss://xrplcluster.com'
-  }
-  public static get PEER_SYNC_INTERVAL(): number {
-    return process.env.PEER_SYNC_INTERVAL ? Number(process.env.PEER_SYNC_INTERVAL) : 3600
-  }
-  public static get PEER_PRIVATE(): boolean {
-    return process.env.PEER_PRIVATE === 'true' ? true : false
   }
   public static get SERVER_CERTIFICATE_DAYS(): string {
     return process.env.SERVER_CERTIFICATE_DAYS || '3650'

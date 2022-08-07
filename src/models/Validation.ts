@@ -1,6 +1,6 @@
 import { Schema, model } from 'mongoose'
 
-interface IValidation {
+export interface IValidation {
   cookie: string;
   type: string;
   base_fee: number;
