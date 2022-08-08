@@ -1,5 +1,9 @@
 import Validation from '../models/Validation'
 import xrplclient from '../services/xrpl'
+import logger from '../logger'
+import ENV from '../lib/ENV'
+
+const LOGPREFIX = '[ingress]'
 
 const ingress = async () => {
   xrplclient.on('connected', () => {
@@ -7,6 +11,7 @@ const ingress = async () => {
       command: 'subscribe',
       streams: ['validations'],
     })
+    logger.info(LOGPREFIX, `Ingressing validation messages from ${ENV.RIPPLED_URL}`)
   })
 
   xrplclient.on('validationReceived', async (validation) => {
@@ -14,7 +19,7 @@ const ingress = async () => {
       await Validation.create(validation)
     } catch (error) {
       if (error instanceof Error) {
-        console.error(error.message)
+        logger.error(LOGPREFIX, `${error}`)
       }
     }
   })
