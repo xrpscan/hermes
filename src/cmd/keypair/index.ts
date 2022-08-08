@@ -10,5 +10,6 @@ yargs
 .command(PublicKey)
 .command(Certificate)
 .command(Fingerprint)
+.demandCommand(1, 'You must enter one of the supported commands')
 .help()
 .argv
