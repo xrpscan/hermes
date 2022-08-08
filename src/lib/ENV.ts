@@ -40,7 +40,7 @@ class ENV {
     return process.env.SERVER_REST_ENABLED === 'true' ? true : false
   }
   public static get SERVER_REST_PORT(): number {
-    return process.env.SERVER_REST_PORT ? Number(process.env.SERVER_REST_PORT) : 3001
+    return process.env.SERVER_REST_PORT ? Number(process.env.SERVER_REST_PORT) : 50588
   }
   public static get SERVER_GRPC_ENABLED(): boolean {
     return process.env.SERVER_GRPC_ENABLED === 'true' ? true : false
@@ -49,7 +49,7 @@ class ENV {
     return process.env.SERVER_GRPC_ADDRESS || '127.0.0.1'
   }
   public static get SERVER_GRPC_PORT(): number {
-    return process.env.SERVER_GRPC_PORT ? Number(process.env.SERVER_GRPC_PORT) : 3002
+    return process.env.SERVER_GRPC_PORT ? Number(process.env.SERVER_GRPC_PORT) : 50589
   }
   public static get EXPRESS_REQUEST_LOG(): string {
     return process.env.EXPRESS_REQUEST_LOG || 'log/express.log'
