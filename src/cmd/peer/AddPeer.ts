@@ -6,12 +6,10 @@ import Peer, { IPeer } from '../../models/Peer'
 import PeerConnection from '../../models/PeerConnection'
 import { SYSTEM_CONFIG_ENDPOINT } from '../../lib/Constants'
 
-import { connectDatabase } from '../../db'
-connectDatabase()
-
 const addPeer = async (argv: any): Promise<void> => {
   if (argv.url) {
-    const url = argv.url.endsWith(SYSTEM_CONFIG_ENDPOINT) ? argv.url : `${argv.url}${SYSTEM_CONFIG_ENDPOINT}`
+    let url = argv.url.includes('://') ? argv.url : `https://${argv.url}`
+    url = url.endsWith(SYSTEM_CONFIG_ENDPOINT) ? url : `${url}${SYSTEM_CONFIG_ENDPOINT}`
     try {
       const agent = new https.Agent({ rejectUnauthorized: false })
       const res = await fetch(url, { agent: agent })
