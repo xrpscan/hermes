@@ -85,7 +85,7 @@ class ENV {
     return process.env.SERVER_CERTIFICATE_SUBJECT_O || 'Unorganized'
   }
   public static get SERVER_CERTIFICATE_SUBJECT_CN(): string {
-    return process.env.SERVER_CERTIFICATE_SUBJECT_CN || 'localhost'
+    return process.env.SERVER_HOSTNAME || 'localhost'
   }
 
 }

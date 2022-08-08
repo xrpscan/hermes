@@ -1,6 +1,7 @@
 import fs from 'node:fs'
 import crypto from 'node:crypto'
 import { spawnSync } from 'node:child_process'
+import ENV from './ENV'
 
 class Keypair {
   private _private_key_file: string
@@ -73,23 +74,23 @@ class Keypair {
   }
 
   generateCert(): boolean {
-    if (process.env.SERVER_PRIVATE_KEY && process.env.SERVER_CERTIFICATE) {
-      const _days = process.env.SERVER_CERTIFICATE_DAYS || '3650'
-      const _C = process.env.SERVER_CERTIFICATE_SUBJECT_C
-      const _ST = process.env.SERVER_CERTIFICATE_SUBJECT_ST
-      const _L = process.env.SERVER_CERTIFICATE_SUBJECT_L
-      const _O = process.env.SERVER_CERTIFICATE_SUBJECT_O
-      const _CN = process.env.SERVER_CERTIFICATE_SUBJECT_CN
+    if (ENV.SERVER_PRIVATE_KEY && ENV.SERVER_CERTIFICATE) {
+      const _days = ENV.SERVER_CERTIFICATE_DAYS || '3650'
+      const _C = ENV.SERVER_CERTIFICATE_SUBJECT_C
+      const _ST = ENV.SERVER_CERTIFICATE_SUBJECT_ST
+      const _L = ENV.SERVER_CERTIFICATE_SUBJECT_L
+      const _O = ENV.SERVER_CERTIFICATE_SUBJECT_O
+      const _CN = ENV.SERVER_CERTIFICATE_SUBJECT_CN
       const cmd = spawnSync('openssl',[
         'req',
         '-key',
-        process.env.SERVER_PRIVATE_KEY,
+        ENV.SERVER_PRIVATE_KEY,
         '-new',
         '-x509',
         '-days',
         _days,
         '-out',
-        process.env.SERVER_CERTIFICATE,
+        ENV.SERVER_CERTIFICATE,
         '-subj',
         `/C=${_C}/ST=${_ST}/L=${_L}/O=${_O}/CN=${_CN}`,
       ])
