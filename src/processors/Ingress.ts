@@ -19,7 +19,7 @@ const ingress = async () => {
       await Validation.create(validation)
     } catch (error) {
       if (error instanceof Error) {
-        logger.error(LOGPREFIX, `${error}`)
+        logger.warn(LOGPREFIX, `${error}`)
       }
     }
   })

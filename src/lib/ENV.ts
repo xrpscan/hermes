@@ -1,6 +1,14 @@
 import 'dotenv/config'
+import logger from 'npmlog'
 
 class ENV {
+  public static get LOG_LEVEL(): string {
+    if (process.env.LOG_LEVEL && Object.keys(logger.levels).includes(process.env.LOG_LEVEL)) {
+      return process.env.LOG_LEVEL
+    } else {
+      return 'info'
+    }
+  }
   public static get INGRESS_ENABLED(): boolean {
     return process.env.INGRESS_ENABLED === 'true' ? true : false
   }
