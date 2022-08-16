@@ -2,6 +2,7 @@ import Validation from '../models/Validation'
 import xrplclient from '../services/xrpl'
 import logger from '../logger'
 import ENV from '../lib/ENV'
+import { MongoServerError } from 'mongodb'
 
 const LOGPREFIX = '[ingress]'
 
@@ -18,8 +19,11 @@ const ingress = async () => {
     try {
       await Validation.create(validation)
     } catch (error) {
-      if (error instanceof Error) {
-        logger.warn(LOGPREFIX, `${error}`)
+      if (error instanceof MongoServerError && error.code === 11000) {
+        logger.verbose(LOGPREFIX, `${error}`)
+      }
+      else {
+        logger.error(LOGPREFIX, `${error}`)
       }
     }
   })
