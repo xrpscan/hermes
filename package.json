@@ -38,11 +38,11 @@
   },
   "scripts": {
     "lint": "eslint .",
-    "build": "yarn proto:build && yarn tsc",
+    "build": "npm run proto:build && npx tsc -b",
     "start": "node dist/index.js",
     "ingress": "node dist/cmd/ingress/index.js",
     "proto:build": "./bin/build-protos.sh",
-    "dev": "concurrently 'yarn proto:build' 'yarn tsc --watch' 'nodemon -q dist/index.js' ",
+    "dev": "concurrently 'npm run proto:build' 'npx tsc --watch' 'nodemon -q dist/index.js' ",
     "peer": "node dist/cmd/peer/index.js",
     "keypair": "node dist/cmd/keypair/index.js"
   }
