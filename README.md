@@ -80,6 +80,25 @@ Run the provided pm2 start script
 $ ./bin/start.sh
 ```
 
+### Upgrading (from source)
+
+1. Hermes can be upgraded from source. To be on the safer side, please backup your SSL keys (default location is `config/private.pem`, `config/cert.pem`) and `.env` config file.
+
+```
+$ cd hermes
+$ git fetch --all
+$ git rebase origin/main
+$ npm run build
+```
+
+2. If required, restore SSL keys and `.env` file.
+
+3. Start upgraded Hermes server
+
+```
+$ npm start
+```
+
 ### Creating a P2P network
 
 Hermes servers can be linked together to create a layer 2 messaging network. To add `vms.test.xrpscan.com:50588` as a peer, run:
