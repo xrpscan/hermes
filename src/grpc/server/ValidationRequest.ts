@@ -6,39 +6,83 @@ import {
   ValidationResponse
 } from '../../protos/pb/validations_pb'
 import Validation from "../../models/Validation"
+import logger from '../../logger'
+
+const LOGPREFIX = '[grpc:ValidationRequest]'
 
 export const getValidationsByLedger = async ( call: grpc.ServerWritableStream<LedgerRequest, ValidationResponse> ) => {
   const request = call.request as LedgerRequest
-  for await (const doc of Validation.find({ ledger_index: request.getLedgerIndex() })) {
-    call.write(await serialize(doc))
-  }
-  call.end()
+  const cursor = Validation
+  .find({ ledger_index: request.getLedgerIndex() })
+  .lean()
+  .cursor()
+
+  cursor.on('data', async (doc) => {
+    cursor.pause()
+    call.write(serialize(doc), () => {
+      cursor.resume()
+    })
+  })
+  cursor.on('end', () => {
+    call.end()
+  })
+  cursor.on('error', (error) => {
+    call.end()
+    logger.error(LOGPREFIX, `${error}`)
+  })
 }
 
 export const getValidationsByLedgerRange = async ( call: grpc.ServerWritableStream<LedgerRangeRequest, ValidationResponse> ) => {
   const request = call.request as LedgerRangeRequest
-  for await (const doc of Validation
-    .find({
-      ledger_index: {
-        $gte: request.getLedgerIndexMin(),
-        $lte: request.getLedgerIndexMax()
-      }})
-    ) {
-    call.write(await serialize(doc))
-  }
-  call.end()
+  const cursor = Validation
+  .find({
+    ledger_index: {
+      $gte: request.getLedgerIndexMin(),
+      $lte: request.getLedgerIndexMax()
+    }
+  })
+  .lean()
+  .cursor()
+
+  cursor.on('data', async (doc) => {
+    cursor.pause()
+    call.write(serialize(doc), () => {
+      cursor.resume()
+    })
+  })
+  cursor.on('end', () => {
+    call.end()
+  })
+  cursor.on('error', (error) => {
+    call.end()
+    logger.error(LOGPREFIX, `${error}`)
+  })
 }
 
 export const getValidationsByMasterKey = async ( call: grpc.ServerWritableStream<MasterKeyRequest, ValidationResponse> ) => {
   const request = call.request as MasterKeyRequest
-  for await (const doc of Validation.find({ master_key: request.getMasterKey() })) {
-    call.write(await serialize(doc))
-  }
-  call.end()
+  const cursor = Validation
+  .find({ master_key: request.getMasterKey() })
+  .lean()
+  .cursor()
+
+  cursor.on('data', async (doc) => {
+    cursor.pause()
+    call.write(serialize(doc), () => {
+      cursor.resume()
+    })
+  })
+  cursor.on('end', () => {
+    call.end()
+  })
+  cursor.on('error', (error) => {
+    call.end()
+    logger.error(LOGPREFIX, `${error}`)
+  })
 }
 
 // Internal: Serialize Mongoose object to Protobuf message
-const serialize = async (doc: any): Promise<ValidationResponse> => {
+const serialize = (doc: any): ValidationResponse => {
   const validation = new ValidationResponse()
   validation.setCookie(doc.cookie)
   validation.setType(doc.type)
