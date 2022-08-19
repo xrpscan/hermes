@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Hermes server">
+    <title>Hermes server</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <meta name="theme-color" content="#004a7c">
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+
+      .b-example-divider {
+        height: 3rem;
+        background-color: rgba(0, 0, 0, .1);
+        border: solid rgba(0, 0, 0, .15);
+        border-width: 1px 0;
+        box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+      }
+
+      .b-example-vr {
+        flex-shrink: 0;
+        width: 1.5rem;
+        height: 100vh;
+      }
+
+      .bi {
+        vertical-align: -.125em;
+        fill: currentColor;
+      }
+
+      .nav-scroller {
+        position: relative;
+        z-index: 2;
+        height: 2.75rem;
+        overflow-y: hidden;
+      }
+
+      .nav-scroller .nav {
+        display: flex;
+        flex-wrap: nowrap;
+        padding-bottom: 1rem;
+        margin-top: -1px;
+        overflow-x: auto;
+        text-align: center;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+      }
+ 
+      .icon-list li::before {
+        display: block;
+        flex-shrink: 0;
+        width: 1.5em;
+        height: 1.5em;
+        margin-right: .5rem;
+        content: "";
+        background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23212529' viewBox='0 0 16 16'%3E%3Cpath d='M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z'/%3E%3C/svg%3E") no-repeat center center / 100% auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="col-lg-8 mx-auto p-3 py-md-5">
+      <header class="d-flex align-items-center pb-3 mb-5 border-bottom">
+        <a href="/" class="d-flex align-items-center text-dark text-decoration-none">
+          <span class="fs-4">Hermes server</span>
+        </a>
+      </header>
+
+  <main>
+    <h1>Hermes: XRPL Validation message service</h1>
+    <p class="fs-5 col-md-8">Hermes is a layer 2 messaging network for storing and relaying XRPL
+      validation messages. Hermes servers can be linked together to create a P2P network to spool
+      <code>validationReceived</code> messages emitted by rippled.
+    </p>
+
+    <hr class="col-3 col-md-2 mb-5">
+
+    <div class="row g-5">
+      <div class="col-md-6">
+        <h2>Explore</h2>
+        <p>These REST endpoints can provide Hermes server's status</p>
+        <ul class="icon-list ps-0">
+          <li class="d-flex align-items-start mb-1"><a href="/api/v1/server/config" rel="noopener" target="_blank">/api/v1/server/config</a></li>
+          <li class="d-flex align-items-start mb-1"><a href="/api/v1/peers" rel="noopener" target="_blank">/api/v1/peers</a></li>
+        </ul>
+      </div>
+
+      <div class="col-md-6">
+        <h2>Resources</h2>
+        <p>Read more detailed instructions and blog post on Hermes.</p>
+        <ul class="icon-list ps-0">
+          <li class="d-flex align-items-start mb-1"><a href="https://dev.to/xrpscan/" rel="noopener" target="_blank">Hermes announcement blog post</a></li>
+          <li class="d-flex align-items-start mb-1"><a href="https://github.com/xrpscan/hermes/blob/main/README.md" rel="noopener" target="_blank">Installation manual on GitHub</a></li>
+        </ul>
+      </div>
+    </div>
+  </main>
+  <footer class="pt-5 my-5 text-muted border-top">
+    Hermes server &middot; &copy; 2022, The XRPScan Project
+  </footer>
+  </div>
+  </body>
+</html>

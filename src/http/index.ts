@@ -27,6 +27,7 @@ export const startExpressServer = () => {
   app.use('/api/v1/peers', PeerController)
   app.use('/api/v1/server', ServerController)
   app.use('/api/v1/ping', PingController)
+  app.use(express.static('public'))
 
   // Start https server if server certificate and private key is present.
   // Otherwise start http service
