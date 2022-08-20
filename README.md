@@ -121,6 +121,10 @@ To remove a peer, run:
 $ npm run peer remove <node_id>
 ```
 
+### Architecture
+
+![Hermes architecture](https://github.com/xrpscan/hermes/blob/main/assets/hermes-architecture.png?raw=true)
+
 ### Known issues
 
 * [yarn peer [add|ls|remove] commands don't return shell #6](https://github.com/xrpscan/hermes/issues/6)
