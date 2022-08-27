@@ -91,7 +91,9 @@ proto.ping.PingRequest.prototype.toObject = function(opt_includeInstance) {
  */
 proto.ping.PingRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    message: jspb.Message.getFieldWithDefault(msg, 1, "")
+    message: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    requestingNode: jspb.Message.getFieldWithDefault(msg, 14, ""),
+    requestingHost: jspb.Message.getFieldWithDefault(msg, 15, "")
   };
 
   if (includeInstance) {
@@ -132,6 +134,14 @@ proto.ping.PingRequest.deserializeBinaryFromReader = function(msg, reader) {
       var value = /** @type {string} */ (reader.readString());
       msg.setMessage(value);
       break;
+    case 14:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setRequestingNode(value);
+      break;
+    case 15:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setRequestingHost(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -168,6 +178,20 @@ proto.ping.PingRequest.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
+  f = /** @type {string} */ (jspb.Message.getField(message, 14));
+  if (f != null) {
+    writer.writeString(
+      14,
+      f
+    );
+  }
+  f = /** @type {string} */ (jspb.Message.getField(message, 15));
+  if (f != null) {
+    writer.writeString(
+      15,
+      f
+    );
+  }
 };
 
 
@@ -186,6 +210,78 @@ proto.ping.PingRequest.prototype.getMessage = function() {
  */
 proto.ping.PingRequest.prototype.setMessage = function(value) {
   return jspb.Message.setProto3StringField(this, 1, value);
+};
+
+
+/**
+ * optional string requesting_node = 14;
+ * @return {string}
+ */
+proto.ping.PingRequest.prototype.getRequestingNode = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 14, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.ping.PingRequest} returns this
+ */
+proto.ping.PingRequest.prototype.setRequestingNode = function(value) {
+  return jspb.Message.setField(this, 14, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.ping.PingRequest} returns this
+ */
+proto.ping.PingRequest.prototype.clearRequestingNode = function() {
+  return jspb.Message.setField(this, 14, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.ping.PingRequest.prototype.hasRequestingNode = function() {
+  return jspb.Message.getField(this, 14) != null;
+};
+
+
+/**
+ * optional string requesting_host = 15;
+ * @return {string}
+ */
+proto.ping.PingRequest.prototype.getRequestingHost = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 15, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.ping.PingRequest} returns this
+ */
+proto.ping.PingRequest.prototype.setRequestingHost = function(value) {
+  return jspb.Message.setField(this, 15, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.ping.PingRequest} returns this
+ */
+proto.ping.PingRequest.prototype.clearRequestingHost = function() {
+  return jspb.Message.setField(this, 15, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.ping.PingRequest.prototype.hasRequestingHost = function() {
+  return jspb.Message.getField(this, 15) != null;
 };
 
 

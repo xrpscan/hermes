@@ -5,6 +5,7 @@ import * as grpc from "@grpc/grpc-js"
 import { PingClient } from '../protos/pb/ping_grpc_pb'
 import { PingRequest, PongResponse } from "../protos/pb/ping_pb"
 import { IPeer } from './Peer'
+import LocalNode from '../lib/LocalNode'
 
 import { SYSTEM_CONFIG_ENDPOINT } from '../lib/Constants'
 
@@ -47,6 +48,8 @@ class PeerConnection {
     const req = new PingRequest()
     const message = crypto.randomBytes(32).toString('hex')
     req.setMessage(message)
+    if (LocalNode.node_id) req.setRequestingNode(LocalNode.node_id)
+    if (LocalNode.host) req.setRequestingHost(LocalNode.host)
 
     try {
       return new Promise((resolve, reject) => client.ping(req, (error, res: PongResponse) => {

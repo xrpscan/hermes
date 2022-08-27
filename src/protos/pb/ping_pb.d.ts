@@ -10,6 +10,16 @@ export class PingRequest extends jspb.Message {
     getMessage(): string;
     setMessage(value: string): PingRequest;
 
+    hasRequestingNode(): boolean;
+    clearRequestingNode(): void;
+    getRequestingNode(): string | undefined;
+    setRequestingNode(value: string): PingRequest;
+
+    hasRequestingHost(): boolean;
+    clearRequestingHost(): void;
+    getRequestingHost(): string | undefined;
+    setRequestingHost(value: string): PingRequest;
+
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): PingRequest.AsObject;
     static toObject(includeInstance: boolean, msg: PingRequest): PingRequest.AsObject;
@@ -23,6 +33,8 @@ export class PingRequest extends jspb.Message {
 export namespace PingRequest {
     export type AsObject = {
         message: string,
+        requestingNode?: string,
+        requestingHost?: string,
     }
 }
 

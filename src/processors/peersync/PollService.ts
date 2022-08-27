@@ -8,6 +8,7 @@ import {
   ValidationResponse,
 } from '../../protos/pb/validations_pb'
 import PeerManager from "./PeerManager"
+import LocalNode from '../../lib/LocalNode'
 
 const LOGPREFIX = '[peersync]'
 
@@ -34,6 +35,8 @@ class PollService {
     const ledgerRangeRequest = new LedgerRangeRequest()
     ledgerRangeRequest.setLedgerIndexMin(ledgerIndexMin)
     ledgerRangeRequest.setLedgerIndexMax(ledgerIndexMax)
+    if (LocalNode.node_id) ledgerRangeRequest.setRequestingNode(LocalNode.node_id)
+    if (LocalNode.host) ledgerRangeRequest.setRequestingHost(LocalNode.host)
 
     client.getValidationsByLedgerRange(ledgerRangeRequest)
     .on('data', (validation: ValidationResponse) => {
@@ -43,7 +46,7 @@ class PollService {
     .on('end', () => {
       delete this._manager.connections[this._peer.node_id]
       const timeTaken = new Date().getTime() - this._startTime
-      logger.info(LOGPREFIX, `Peer ${this._peer.node_id} sync complete (${this._totalDocs} validations in ${timeTaken/1000} sec)`)
+      logger.info(LOGPREFIX, `Peer ${this._peer.node_id} ${this._peer.grpc_url} sync complete (${this._totalDocs} validations in ${timeTaken/1000} sec)`)
     })
     .on('error', (error: any) => {
       delete this._manager.connections[this._peer.node_id]

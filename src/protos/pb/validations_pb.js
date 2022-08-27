@@ -135,7 +135,9 @@ proto.validations.LedgerRequest.prototype.toObject = function(opt_includeInstanc
  */
 proto.validations.LedgerRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    ledgerIndex: jspb.Message.getFieldWithDefault(msg, 1, 0)
+    ledgerIndex: jspb.Message.getFieldWithDefault(msg, 1, 0),
+    requestingNode: jspb.Message.getFieldWithDefault(msg, 14, ""),
+    requestingHost: jspb.Message.getFieldWithDefault(msg, 15, "")
   };
 
   if (includeInstance) {
@@ -176,6 +178,14 @@ proto.validations.LedgerRequest.deserializeBinaryFromReader = function(msg, read
       var value = /** @type {number} */ (reader.readUint32());
       msg.setLedgerIndex(value);
       break;
+    case 14:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setRequestingNode(value);
+      break;
+    case 15:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setRequestingHost(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -212,6 +222,20 @@ proto.validations.LedgerRequest.serializeBinaryToWriter = function(message, writ
       f
     );
   }
+  f = /** @type {string} */ (jspb.Message.getField(message, 14));
+  if (f != null) {
+    writer.writeString(
+      14,
+      f
+    );
+  }
+  f = /** @type {string} */ (jspb.Message.getField(message, 15));
+  if (f != null) {
+    writer.writeString(
+      15,
+      f
+    );
+  }
 };
 
 
@@ -230,6 +254,78 @@ proto.validations.LedgerRequest.prototype.getLedgerIndex = function() {
  */
 proto.validations.LedgerRequest.prototype.setLedgerIndex = function(value) {
   return jspb.Message.setProto3IntField(this, 1, value);
+};
+
+
+/**
+ * optional string requesting_node = 14;
+ * @return {string}
+ */
+proto.validations.LedgerRequest.prototype.getRequestingNode = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 14, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.validations.LedgerRequest} returns this
+ */
+proto.validations.LedgerRequest.prototype.setRequestingNode = function(value) {
+  return jspb.Message.setField(this, 14, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.validations.LedgerRequest} returns this
+ */
+proto.validations.LedgerRequest.prototype.clearRequestingNode = function() {
+  return jspb.Message.setField(this, 14, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.validations.LedgerRequest.prototype.hasRequestingNode = function() {
+  return jspb.Message.getField(this, 14) != null;
+};
+
+
+/**
+ * optional string requesting_host = 15;
+ * @return {string}
+ */
+proto.validations.LedgerRequest.prototype.getRequestingHost = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 15, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.validations.LedgerRequest} returns this
+ */
+proto.validations.LedgerRequest.prototype.setRequestingHost = function(value) {
+  return jspb.Message.setField(this, 15, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.validations.LedgerRequest} returns this
+ */
+proto.validations.LedgerRequest.prototype.clearRequestingHost = function() {
+  return jspb.Message.setField(this, 15, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.validations.LedgerRequest.prototype.hasRequestingHost = function() {
+  return jspb.Message.getField(this, 15) != null;
 };
 
 
@@ -266,7 +362,9 @@ proto.validations.LedgerRangeRequest.prototype.toObject = function(opt_includeIn
 proto.validations.LedgerRangeRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
     ledgerIndexMin: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    ledgerIndexMax: jspb.Message.getFieldWithDefault(msg, 2, 0)
+    ledgerIndexMax: jspb.Message.getFieldWithDefault(msg, 2, 0),
+    requestingNode: jspb.Message.getFieldWithDefault(msg, 14, ""),
+    requestingHost: jspb.Message.getFieldWithDefault(msg, 15, "")
   };
 
   if (includeInstance) {
@@ -311,6 +409,14 @@ proto.validations.LedgerRangeRequest.deserializeBinaryFromReader = function(msg,
       var value = /** @type {number} */ (reader.readUint32());
       msg.setLedgerIndexMax(value);
       break;
+    case 14:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setRequestingNode(value);
+      break;
+    case 15:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setRequestingHost(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -354,6 +460,20 @@ proto.validations.LedgerRangeRequest.serializeBinaryToWriter = function(message,
       f
     );
   }
+  f = /** @type {string} */ (jspb.Message.getField(message, 14));
+  if (f != null) {
+    writer.writeString(
+      14,
+      f
+    );
+  }
+  f = /** @type {string} */ (jspb.Message.getField(message, 15));
+  if (f != null) {
+    writer.writeString(
+      15,
+      f
+    );
+  }
 };
 
 
@@ -393,6 +513,78 @@ proto.validations.LedgerRangeRequest.prototype.setLedgerIndexMax = function(valu
 };
 
 
+/**
+ * optional string requesting_node = 14;
+ * @return {string}
+ */
+proto.validations.LedgerRangeRequest.prototype.getRequestingNode = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 14, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.validations.LedgerRangeRequest} returns this
+ */
+proto.validations.LedgerRangeRequest.prototype.setRequestingNode = function(value) {
+  return jspb.Message.setField(this, 14, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.validations.LedgerRangeRequest} returns this
+ */
+proto.validations.LedgerRangeRequest.prototype.clearRequestingNode = function() {
+  return jspb.Message.setField(this, 14, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.validations.LedgerRangeRequest.prototype.hasRequestingNode = function() {
+  return jspb.Message.getField(this, 14) != null;
+};
+
+
+/**
+ * optional string requesting_host = 15;
+ * @return {string}
+ */
+proto.validations.LedgerRangeRequest.prototype.getRequestingHost = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 15, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.validations.LedgerRangeRequest} returns this
+ */
+proto.validations.LedgerRangeRequest.prototype.setRequestingHost = function(value) {
+  return jspb.Message.setField(this, 15, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.validations.LedgerRangeRequest} returns this
+ */
+proto.validations.LedgerRangeRequest.prototype.clearRequestingHost = function() {
+  return jspb.Message.setField(this, 15, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.validations.LedgerRangeRequest.prototype.hasRequestingHost = function() {
+  return jspb.Message.getField(this, 15) != null;
+};
+
+
 
 
 
@@ -425,7 +617,9 @@ proto.validations.MasterKeyRequest.prototype.toObject = function(opt_includeInst
  */
 proto.validations.MasterKeyRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    masterKey: jspb.Message.getFieldWithDefault(msg, 1, "")
+    masterKey: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    requestingNode: jspb.Message.getFieldWithDefault(msg, 14, ""),
+    requestingHost: jspb.Message.getFieldWithDefault(msg, 15, "")
   };
 
   if (includeInstance) {
@@ -466,6 +660,14 @@ proto.validations.MasterKeyRequest.deserializeBinaryFromReader = function(msg, r
       var value = /** @type {string} */ (reader.readString());
       msg.setMasterKey(value);
       break;
+    case 14:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setRequestingNode(value);
+      break;
+    case 15:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setRequestingHost(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -502,6 +704,20 @@ proto.validations.MasterKeyRequest.serializeBinaryToWriter = function(message, w
       f
     );
   }
+  f = /** @type {string} */ (jspb.Message.getField(message, 14));
+  if (f != null) {
+    writer.writeString(
+      14,
+      f
+    );
+  }
+  f = /** @type {string} */ (jspb.Message.getField(message, 15));
+  if (f != null) {
+    writer.writeString(
+      15,
+      f
+    );
+  }
 };
 
 
@@ -520,6 +736,78 @@ proto.validations.MasterKeyRequest.prototype.getMasterKey = function() {
  */
 proto.validations.MasterKeyRequest.prototype.setMasterKey = function(value) {
   return jspb.Message.setProto3StringField(this, 1, value);
+};
+
+
+/**
+ * optional string requesting_node = 14;
+ * @return {string}
+ */
+proto.validations.MasterKeyRequest.prototype.getRequestingNode = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 14, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.validations.MasterKeyRequest} returns this
+ */
+proto.validations.MasterKeyRequest.prototype.setRequestingNode = function(value) {
+  return jspb.Message.setField(this, 14, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.validations.MasterKeyRequest} returns this
+ */
+proto.validations.MasterKeyRequest.prototype.clearRequestingNode = function() {
+  return jspb.Message.setField(this, 14, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.validations.MasterKeyRequest.prototype.hasRequestingNode = function() {
+  return jspb.Message.getField(this, 14) != null;
+};
+
+
+/**
+ * optional string requesting_host = 15;
+ * @return {string}
+ */
+proto.validations.MasterKeyRequest.prototype.getRequestingHost = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 15, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.validations.MasterKeyRequest} returns this
+ */
+proto.validations.MasterKeyRequest.prototype.setRequestingHost = function(value) {
+  return jspb.Message.setField(this, 15, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.validations.MasterKeyRequest} returns this
+ */
+proto.validations.MasterKeyRequest.prototype.clearRequestingHost = function() {
+  return jspb.Message.setField(this, 15, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.validations.MasterKeyRequest.prototype.hasRequestingHost = function() {
+  return jspb.Message.getField(this, 15) != null;
 };
 
 

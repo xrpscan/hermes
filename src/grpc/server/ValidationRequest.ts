@@ -8,10 +8,11 @@ import {
 import Validation from "../../models/Validation"
 import logger from '../../logger'
 
-const LOGPREFIX = '[grpc:ValidationRequest]'
+const LOGPREFIX = '[grpc]'
 
 export const getValidationsByLedger = async ( call: grpc.ServerWritableStream<LedgerRequest, ValidationResponse> ) => {
   const request = call.request as LedgerRequest
+  logger.info(LOGPREFIX, `Ledger request from ${request.getRequestingNode()} ${request.getRequestingHost()}: ${request.getLedgerIndex()}`)
   const cursor = Validation
   .find({ ledger_index: request.getLedgerIndex() })
   .lean()
@@ -34,6 +35,7 @@ export const getValidationsByLedger = async ( call: grpc.ServerWritableStream<Le
 
 export const getValidationsByLedgerRange = async ( call: grpc.ServerWritableStream<LedgerRangeRequest, ValidationResponse> ) => {
   const request = call.request as LedgerRangeRequest
+  logger.info(LOGPREFIX, `LedgerRange request from ${request.getRequestingNode()} ${request.getRequestingHost()}: [${request.getLedgerIndexMin()}..${request.getLedgerIndexMax()}]`)
   const cursor = Validation
   .find({
     ledger_index: {
@@ -61,6 +63,7 @@ export const getValidationsByLedgerRange = async ( call: grpc.ServerWritableStre
 
 export const getValidationsByMasterKey = async ( call: grpc.ServerWritableStream<MasterKeyRequest, ValidationResponse> ) => {
   const request = call.request as MasterKeyRequest
+  logger.info(LOGPREFIX, `MasterKey request from ${request.getRequestingNode()} ${request.getRequestingHost()}: ${request.getMasterKey()}`)
   const cursor = Validation
   .find({ master_key: request.getMasterKey() })
   .lean()

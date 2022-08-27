@@ -4,6 +4,10 @@ package ping;
 
 message PingRequest {
   string message = 1;
+  reserved 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13;
+
+  optional string requesting_node = 14;
+  optional string requesting_host = 15;
 }
 
 message PongResponse {

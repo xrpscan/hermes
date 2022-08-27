@@ -4,15 +4,27 @@ package validations;
 
 message LedgerRequest {
   uint32 ledger_index = 1;
+  reserved 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13;
+
+  optional string requesting_node = 14;
+  optional string requesting_host = 15;
 }
 
 message LedgerRangeRequest {
   uint32 ledger_index_min = 1;
   uint32 ledger_index_max = 2;
+  reserved 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13;
+
+  optional string requesting_node = 14;
+  optional string requesting_host = 15;
 }
 
 message MasterKeyRequest {
   string master_key = 1;
+  reserved 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13;
+
+  optional string requesting_node = 14;
+  optional string requesting_host = 15;
 }
 
 message ValidationResponse {

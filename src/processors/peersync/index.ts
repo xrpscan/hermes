@@ -15,7 +15,7 @@ const pollAllPeers = async (peerManager: PeerManager): Promise<void> => {
     .lean()
     ) {
       if (peerManager.connections[peer.node_id]) {
-        peerManager.emit('error', new Error(`Connection to peer ${peer.node_id} exists`))
+        peerManager.emit('error', new Error(`Connection to peer ${peer.node_id} ${peer.grpc_url} exists`))
       } else {
         peerManager.connections[peer.node_id] = true
         await peerManager.poll(peer)

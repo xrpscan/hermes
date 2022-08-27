@@ -29,11 +29,8 @@ const client = new ValidationsClient(
 
 const ledgerRequest = new LedgerRequest()
 ledgerRequest.setLedgerIndex(72982904)
-
-client.getValidationsByLedger(ledgerRequest)
-.on('data', (validation: ValidationResponse) => {
-  console.log('[getValidationsByLedger]' + validation.getLedgerIndex())
-})
+ledgerRequest.setRequestingNode('hEf94tMDQLuatpNk63mfVgXrFvo4YNDZvBTZtCZktrpd4')
+ledgerRequest.setRequestingHost('peer.example.com')
 
 client.getValidationsByLedger(ledgerRequest)
 .on('data', (validation: ValidationResponse) => {
@@ -50,6 +47,8 @@ client.getValidationsByLedger(ledgerRequest)
 
 const masterKeyRequest = new MasterKeyRequest()
 masterKeyRequest.setMasterKey('nHDB2PAPYqF86j9j3c6w1F1ZqwvQfiWcFShZ9Pokg9q4ohNDSkAz')
+masterKeyRequest.setRequestingNode('hEf94tMDQLuatpNk63mfVgXrFvo4YNDZvBTZtCZktrpd4')
+masterKeyRequest.setRequestingHost('peer.example.com')
 
 client.getValidationsByMasterKey(masterKeyRequest)
 .on('data', (validation: ValidationResponse) => {
@@ -61,6 +60,8 @@ client.getValidationsByMasterKey(masterKeyRequest)
 const ledgerRangeRequest = new LedgerRangeRequest()
 ledgerRangeRequest.setLedgerIndexMin(72982904)
 ledgerRangeRequest.setLedgerIndexMax(75088275)
+ledgerRangeRequest.setRequestingNode('hEf94tMDQLuatpNk63mfVgXrFvo4YNDZvBTZtCZktrpd4')
+ledgerRangeRequest.setRequestingHost('peer.example.com')
 
 client.getValidationsByLedgerRange(ledgerRangeRequest)
 .on('data', (validation: ValidationResponse) => {

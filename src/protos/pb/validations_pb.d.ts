@@ -10,6 +10,16 @@ export class LedgerRequest extends jspb.Message {
     getLedgerIndex(): number;
     setLedgerIndex(value: number): LedgerRequest;
 
+    hasRequestingNode(): boolean;
+    clearRequestingNode(): void;
+    getRequestingNode(): string | undefined;
+    setRequestingNode(value: string): LedgerRequest;
+
+    hasRequestingHost(): boolean;
+    clearRequestingHost(): void;
+    getRequestingHost(): string | undefined;
+    setRequestingHost(value: string): LedgerRequest;
+
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): LedgerRequest.AsObject;
     static toObject(includeInstance: boolean, msg: LedgerRequest): LedgerRequest.AsObject;
@@ -23,6 +33,8 @@ export class LedgerRequest extends jspb.Message {
 export namespace LedgerRequest {
     export type AsObject = {
         ledgerIndex: number,
+        requestingNode?: string,
+        requestingHost?: string,
     }
 }
 
@@ -31,6 +43,16 @@ export class LedgerRangeRequest extends jspb.Message {
     setLedgerIndexMin(value: number): LedgerRangeRequest;
     getLedgerIndexMax(): number;
     setLedgerIndexMax(value: number): LedgerRangeRequest;
+
+    hasRequestingNode(): boolean;
+    clearRequestingNode(): void;
+    getRequestingNode(): string | undefined;
+    setRequestingNode(value: string): LedgerRangeRequest;
+
+    hasRequestingHost(): boolean;
+    clearRequestingHost(): void;
+    getRequestingHost(): string | undefined;
+    setRequestingHost(value: string): LedgerRangeRequest;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): LedgerRangeRequest.AsObject;
@@ -46,12 +68,24 @@ export namespace LedgerRangeRequest {
     export type AsObject = {
         ledgerIndexMin: number,
         ledgerIndexMax: number,
+        requestingNode?: string,
+        requestingHost?: string,
     }
 }
 
 export class MasterKeyRequest extends jspb.Message { 
     getMasterKey(): string;
     setMasterKey(value: string): MasterKeyRequest;
+
+    hasRequestingNode(): boolean;
+    clearRequestingNode(): void;
+    getRequestingNode(): string | undefined;
+    setRequestingNode(value: string): MasterKeyRequest;
+
+    hasRequestingHost(): boolean;
+    clearRequestingHost(): void;
+    getRequestingHost(): string | undefined;
+    setRequestingHost(value: string): MasterKeyRequest;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): MasterKeyRequest.AsObject;
@@ -66,6 +100,8 @@ export class MasterKeyRequest extends jspb.Message {
 export namespace MasterKeyRequest {
     export type AsObject = {
         masterKey: string,
+        requestingNode?: string,
+        requestingHost?: string,
     }
 }
 
