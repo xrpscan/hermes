@@ -17,7 +17,6 @@ const pollAllPeers = async (peerManager: PeerManager): Promise<void> => {
       if (peerManager.connections[peer.node_id]) {
         peerManager.emit('error', new Error(`Connection to peer ${peer.node_id} ${peer.grpc_url} exists`))
       } else {
-        peerManager.connections[peer.node_id] = true
         await peerManager.poll(peer)
       }
     }
@@ -27,6 +26,8 @@ const peerSync = async () => {
   const peerManager = new PeerManager()
 
   peerManager.on('poll', async (peer: IPeer) => {
+    if (peer.node_id in peerManager.connections) { return }
+    peerManager.connections[peer.node_id] = true
     const ledgerIndexMax = await xrplclient.getLedgerIndex()
     const ledgerIndexMin = ledgerIndexMax - ENV.PEERSYNC_FETCH_DEPTH
     logger.info(LOGPREFIX, `Polling ${peer.node_id} ${peer.grpc_url} [${ledgerIndexMin}..${ledgerIndexMax}]`)
