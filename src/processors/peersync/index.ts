@@ -34,7 +34,7 @@ const peerSync = async () => {
     const ledgerIndexMin = ledgerIndexMax - ENV.PEERSYNC_FETCH_DEPTH
     logger.info(LOGPREFIX, `Polling ${peer.node_id} ${peer.grpc_url} [${ledgerIndexMin}..${ledgerIndexMax}]`)
     const pollService = new PollService(peer, peerManager)
-    pollService.fetch(ledgerIndexMin, ledgerIndexMax)
+    await pollService.fetch(ledgerIndexMin, ledgerIndexMax)
   })
 
   peerManager.on('error', (error: any) => {
