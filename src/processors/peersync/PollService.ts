@@ -50,7 +50,7 @@ class PollService {
     })
     .on('error', (error: any) => {
       delete this._manager.connections[this._peer.node_id]
-      logger.error(LOGPREFIX, `${this._peer.node_id} ${error}`)
+      logger.error(LOGPREFIX, `${this._peer.node_id} ${this._peer.grpc_url} ${error}`)
     })
   }
 
