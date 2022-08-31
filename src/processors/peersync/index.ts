@@ -14,6 +14,9 @@ const pollAllPeers = async (peerManager: PeerManager): Promise<void> => {
     })
     .lean()
     ) {
+      // my guess here this needs to only be
+      // await peerManager.poll(peer) not sure why skipped on existing connection?
+
       if (peerManager.connections[peer.node_id]) {
         peerManager.emit('error', new Error(`Connection to peer ${peer.node_id} ${peer.grpc_url} exists`))
       } else {
@@ -21,7 +24,9 @@ const pollAllPeers = async (peerManager: PeerManager): Promise<void> => {
         await peerManager.poll(peer)
       }
     }
-    await peerSync()
+
+    // induce a loop to its self after timeout has completed.
+    await setTimeout(pollAllPeers, ENV.PEERSYNC_POLL_INTERVAL_MS, peerManager)
 }
 
 const peerSync = async () => {
@@ -39,7 +44,7 @@ const peerSync = async () => {
     logger.error(LOGPREFIX, `${error}`)
   })
 
-  await setTimeout(pollAllPeers, ENV.PEERSYNC_POLL_INTERVAL_MS, peerManager)
+  await pollAllPeers(peerManager)
 }
 
 const connectPeers = () => {
