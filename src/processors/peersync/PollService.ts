@@ -17,12 +17,14 @@ class PollService {
   private readonly _manager: PeerManager
   private _startTime: number
   private _totalDocs: number
+  private _fetching: boolean
 
   constructor(peer: IPeer, manager: PeerManager) {
     this._peer = peer
     this._manager = manager
     this._startTime = new Date().getTime()
     this._totalDocs = 0
+    this._fetching = false
   }
 
   private credentials(): grpc.ChannelCredentials {
@@ -31,6 +33,8 @@ class PollService {
   }
 
   async fetch(ledgerIndexMin: number, ledgerIndexMax: number) {
+    if (this._fetching) { return }
+    this._fetching = true
     const client = new ValidationsClient(this._peer.grpc_url, this.credentials())
     const ledgerRangeRequest = new LedgerRangeRequest()
     ledgerRangeRequest.setLedgerIndexMin(ledgerIndexMin)
@@ -39,18 +43,20 @@ class PollService {
     if (LocalNode.host) ledgerRangeRequest.setRequestingHost(LocalNode.host)
 
     client.getValidationsByLedgerRange(ledgerRangeRequest)
-    .on('data', (validation: ValidationResponse) => {
-      this.save(validation)
+    .on('data', async (validation: ValidationResponse) => {
+      await this.save(validation)
       this._totalDocs++
     })
     .on('end', () => {
       delete this._manager.connections[this._peer.node_id]
       const timeTaken = new Date().getTime() - this._startTime
       logger.info(LOGPREFIX, `Peer ${this._peer.node_id} ${this._peer.grpc_url} sync complete (${this._totalDocs} validations in ${timeTaken/1000} sec)`)
+      this._fetching = false
     })
     .on('error', (error: any) => {
       delete this._manager.connections[this._peer.node_id]
       logger.error(LOGPREFIX, `${this._peer.node_id} ${error}`)
+      this._fetching = false
     })
   }
 
