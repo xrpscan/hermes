@@ -41,7 +41,7 @@ const peerSync = async () => {
     logger.error(LOGPREFIX, `${error}`)
   })
 
-  pollAllPeers(peerManager)
+  await pollAllPeers(peerManager)
 }
 
 const connectPeers = () => {
