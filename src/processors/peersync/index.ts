@@ -20,6 +20,9 @@ const pollAllPeers = async (peerManager: PeerManager): Promise<void> => {
         await peerManager.poll(peer)
       }
     }
+
+    // induce callback loop
+    setTimeout(pollAllPeers, ENV.PEERSYNC_POLL_INTERVAL_MS, peerManager)
 }
 
 const peerSync = async () => {
@@ -40,7 +43,6 @@ const peerSync = async () => {
   })
 
   await pollAllPeers(peerManager)
-  setInterval(pollAllPeers, ENV.PEERSYNC_POLL_INTERVAL_MS, peerManager)
 }
 
 const connectPeers = () => {
