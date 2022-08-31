@@ -31,7 +31,6 @@ class PollService {
   }
 
   async fetch(ledgerIndexMin: number, ledgerIndexMax: number) {
-    if (this._peer.node_id in this._manager.connections) { return }
     const client = new ValidationsClient(this._peer.grpc_url, this.credentials())
     const ledgerRangeRequest = new LedgerRangeRequest()
     ledgerRangeRequest.setLedgerIndexMin(ledgerIndexMin)
