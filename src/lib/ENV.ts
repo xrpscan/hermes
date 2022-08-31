@@ -30,7 +30,7 @@ class ENV {
     return this.PEERSYNC_POLL_INTERVAL * 1000
   }
   public static get PEERSYNC_FETCH_DEPTH(): number {
-    return process.env.PEERSYNC_FETCH_DEPTH ? Number(process.env.PEERSYNC_FETCH_DEPTH) : 24000
+    return process.env.PEERSYNC_FETCH_DEPTH ? Number(process.env.PEERSYNC_FETCH_DEPTH) : 6000
   }
   public static get PEER_PRIVATE(): boolean {
     return process.env.PEER_PRIVATE === 'true' ? true : false
