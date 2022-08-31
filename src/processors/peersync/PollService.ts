@@ -40,8 +40,8 @@ class PollService {
     if (LocalNode.host) ledgerRangeRequest.setRequestingHost(LocalNode.host)
 
     client.getValidationsByLedgerRange(ledgerRangeRequest)
-    .on('data', (validation: ValidationResponse) => {
-      this.save(validation)
+    .on('data', async (validation: ValidationResponse) => {
+      await this.save(validation)
       this._totalDocs++
     })
     .on('end', () => {
