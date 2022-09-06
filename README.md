@@ -1,6 +1,6 @@
 ## Hermes: XRP Ledger Validation message service
 
-Hermes is a layer 2 messaging network for storing and relaying XRPL validation messages. Hermes servers can be linked together to create a P2P network to spool `validationReceived` messages emitted by rippled. 
+Hermes is a layer 2 messaging network for storing and relaying XRPL validation messages. Hermes servers can be linked together to create a P2P network to spool validation messages emitted by rippled's `validationReceived` event. 
 
 ### What is Hermes?
 Validation messages are ephemeral, therefore they must be saved as soon as they're emitted. If a service processing XRPL Validation messages needs to be momentarily offline (due to an outage, service restart or upgrade), it can fetch missing Validation messages from the Hermes network.
@@ -120,6 +120,41 @@ To remove a peer, run:
 ```
 $ npm run peer remove <node_id>
 ```
+
+### Production notes
+
+These settings are recommended while running Hermes in production environment.
+
+1. Use XFS filesystem
+
+MongoDB strongly recommends using XFS filesystem for its data directory `storage.dbPath`. [Read more →](https://www.mongodb.com/docs/manual/administration/production-notes/#kernel-and-file-systems)
+
+2. Disable Transparent Huge Pages
+
+Database workloads often perform poorly with `transparent_hugepage` enabled, because they tend to have sparse rather than contiguous memory access patterns. When running MongoDB on Linux, `transparent_hugepage` should be disabled for best performance. [Read more →](https://www.mongodb.com/docs/manual/tutorial/transparent-huge-pages/)
+
+3. Limit MongoDB memory usage
+
+With default configuration, MongoDB will use upto 50% of host's memory. To accommodate additional services that need RAM, you may have to decrease WiredTiger internal cache size. [Read more →](https://www.mongodb.com/docs/manual/faq/diagnostics/#memory-diagnostics-for-the-wiredtiger-storage-engine)
+
+```
+storage:
+  dbPath: /var/lib/mongodb
+  ...
+  wiredTiger:
+    engineConfig:
+      cacheSizeGB: 4
+```
+
+4. Using PM2 &amp; Auto start Hermes on boot
+
+In production environment, running Hermes with `pm2` process manager is recommended. An example pm2 startup script is available at `bin/start.sh`. It is possible to auto start pm2 on system boot-up. After Hermes is up and running with pm2, run:
+
+```
+pm2 save
+pm2 startup
+```
+And follow instructions printed by pm2. [Read more →](https://pm2.keymetrics.io/docs/usage/startup/)
 
 ### Architecture
 
