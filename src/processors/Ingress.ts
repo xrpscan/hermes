@@ -1,8 +1,7 @@
-import Validation from '../models/Validation'
 import xrplclient from '../services/xrpl'
 import logger from '../logger'
 import ENV from '../lib/ENV'
-import { MongoServerError } from 'mongodb'
+import ValidationMessage from './ValidationMessage'
 
 const LOGPREFIX = '[ingress]'
 
@@ -17,14 +16,12 @@ const ingress = async () => {
 
   xrplclient.on('validationReceived', async (validation) => {
     try {
-      await Validation.create(validation)
+      // Ugly hack, because xrpl.ValidationStream does not have 'data' property.
+      // https://github.com/XRPLF/xrpl.js/issues/2095
+      const vm = new ValidationMessage( JSON.parse(JSON.stringify(validation)) )
+      await vm.create()
     } catch (error) {
-      if (error instanceof MongoServerError && error.code === 11000) {
-        logger.verbose(LOGPREFIX, `${error}`)
-      }
-      else {
-        logger.error(LOGPREFIX, `${error}`)
-      }
+      logger.error(LOGPREFIX, `${error}`)
     }
   })
 }

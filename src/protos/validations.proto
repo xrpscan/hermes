@@ -39,8 +39,9 @@ message ValidationResponse {
   uint32 signing_time = 9;
   string validated_hash = 10;
   string validation_public_key = 11;
+  string data = 12;
 
-  reserved 12, 13, 14, 15;
+  reserved 13, 14, 15;
 
   string server_version = 16;
   int32 base_fee = 17;

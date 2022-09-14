@@ -88,6 +88,7 @@ export const getValidationsByMasterKey = async ( call: grpc.ServerWritableStream
 const serialize = (doc: any): ValidationResponse => {
   const validation = new ValidationResponse()
   validation.setCookie(doc.cookie)
+  validation.setData(doc.data)
   validation.setType(doc.type)
   validation.setFlags(doc.flags)
   validation.setFull(doc.full)

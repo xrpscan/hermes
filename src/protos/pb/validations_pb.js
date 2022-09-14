@@ -854,6 +854,7 @@ proto.validations.ValidationResponse.toObject = function(includeInstance, msg) {
     signingTime: jspb.Message.getFieldWithDefault(msg, 9, 0),
     validatedHash: jspb.Message.getFieldWithDefault(msg, 10, ""),
     validationPublicKey: jspb.Message.getFieldWithDefault(msg, 11, ""),
+    data: jspb.Message.getFieldWithDefault(msg, 12, ""),
     serverVersion: jspb.Message.getFieldWithDefault(msg, 16, ""),
     baseFee: jspb.Message.getFieldWithDefault(msg, 17, 0),
     loadFee: jspb.Message.getFieldWithDefault(msg, 18, 0),
@@ -938,6 +939,10 @@ proto.validations.ValidationResponse.deserializeBinaryFromReader = function(msg,
     case 11:
       var value = /** @type {string} */ (reader.readString());
       msg.setValidationPublicKey(value);
+      break;
+    case 12:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setData(value);
       break;
     case 16:
       var value = /** @type {string} */ (reader.readString());
@@ -1062,6 +1067,13 @@ proto.validations.ValidationResponse.serializeBinaryToWriter = function(message,
   if (f.length > 0) {
     writer.writeString(
       11,
+      f
+    );
+  }
+  f = message.getData();
+  if (f.length > 0) {
+    writer.writeString(
+      12,
       f
     );
   }
@@ -1298,6 +1310,24 @@ proto.validations.ValidationResponse.prototype.getValidationPublicKey = function
  */
 proto.validations.ValidationResponse.prototype.setValidationPublicKey = function(value) {
   return jspb.Message.setProto3StringField(this, 11, value);
+};
+
+
+/**
+ * optional string data = 12;
+ * @return {string}
+ */
+proto.validations.ValidationResponse.prototype.getData = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 12, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.validations.ValidationResponse} returns this
+ */
+proto.validations.ValidationResponse.prototype.setData = function(value) {
+  return jspb.Message.setProto3StringField(this, 12, value);
 };
 
 

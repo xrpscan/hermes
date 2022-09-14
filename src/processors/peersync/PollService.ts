@@ -1,7 +1,7 @@
 import * as grpc from "@grpc/grpc-js"
 import logger from "../../logger"
 import { IPeer } from '../../models/Peer'
-import Validation, { IValidation } from '../../models/Validation'
+import { IValidation } from '../../models/Validation'
 import { ValidationsClient } from '../../protos/pb/validations_grpc_pb'
 import {
   LedgerRangeRequest,
@@ -9,6 +9,7 @@ import {
 } from '../../protos/pb/validations_pb'
 import PeerManager from "./PeerManager"
 import LocalNode from '../../lib/LocalNode'
+import ValidationMessage from '../ValidationMessage'
 
 const LOGPREFIX = '[peersync]'
 
@@ -57,7 +58,8 @@ class PollService {
   private async save(validation: ValidationResponse) {
     const doc = await this.deserialize(validation)
     try {
-      await Validation.create(doc)
+      const vm = new ValidationMessage(doc)
+      await vm.create()
     } catch {
     }
   }
@@ -66,6 +68,7 @@ class PollService {
   private async deserialize(validation: ValidationResponse): Promise<IValidation> {
     return {
       cookie: validation.getCookie(),
+      data: validation.getData(),
       type: validation.getType(),
       flags: validation.getFlags(),
       full: validation.getFull(),

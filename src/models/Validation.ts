@@ -2,6 +2,7 @@ import { Schema, model } from 'mongoose'
 
 export interface IValidation {
   cookie: string;
+  data: string;
   type: string;
   base_fee: number;
   load_fee: number;
@@ -21,6 +22,7 @@ export interface IValidation {
 
 const ValidationSchema = new Schema<IValidation>({
   cookie: { type: String },
+  data: { type: String },
   type: { type: String, required: true },
   base_fee: { type: Number },
   load_fee: { type: Number },

@@ -128,6 +128,8 @@ export class ValidationResponse extends jspb.Message {
     setValidatedHash(value: string): ValidationResponse;
     getValidationPublicKey(): string;
     setValidationPublicKey(value: string): ValidationResponse;
+    getData(): string;
+    setData(value: string): ValidationResponse;
     getServerVersion(): string;
     setServerVersion(value: string): ValidationResponse;
     getBaseFee(): number;
@@ -162,6 +164,7 @@ export namespace ValidationResponse {
         signingTime: number,
         validatedHash: string,
         validationPublicKey: string,
+        data: string,
         serverVersion: string,
         baseFee: number,
         loadFee: number,
