@@ -28,6 +28,7 @@ const addPeer = async (argv: any): Promise<void> => {
   } else {
     console.error('Error: System config url is required')
   }
+  process.exit(1)
 }
 
 const printPeer = async (peer: IPeer): Promise<void> => {
