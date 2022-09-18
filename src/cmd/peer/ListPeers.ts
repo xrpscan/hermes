@@ -5,7 +5,6 @@ const listPeer = async (): Promise<void> => {
   Peer.find({}, '-_id -certificate -fingerprint', (error, peers) => {
     printPeers(peers)
   })
-  process.exit(1)
 }
 
 const printPeers = async (peers: IPeer[]): Promise<void> => {

@@ -12,7 +12,6 @@ const removePeer = async (argv: any): Promise<void> => {
       }
     })
   }
-  process.exit(1)
 }
 
 const RemovePeerCommand = {

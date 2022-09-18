@@ -11,7 +11,6 @@ const showPeer = async (argv: any): Promise<void> => {
       console.error(`${chalk.red('Error:')} Peer not found: ${argv.node_id}`)
     }
   }
-  process.exit(1)
 }
 
 const printPeer = async (peer: IPeer): Promise<void> => {
