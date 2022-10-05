@@ -41,7 +41,11 @@ class PollService {
 
     client.getValidationsByLedgerRange(ledgerRangeRequest)
     .on('data', async (validation: ValidationResponse) => {
-      await this.save(validation)
+      try {
+        const vm = new ValidationMessage(this.deserialize(validation))
+        await vm.create()
+      } catch {
+      }
       this._totalDocs++
     })
     .on('end', () => {
@@ -55,17 +59,8 @@ class PollService {
     })
   }
 
-  private async save(validation: ValidationResponse) {
-    const doc = await this.deserialize(validation)
-    try {
-      const vm = new ValidationMessage(doc)
-      await vm.create()
-    } catch {
-    }
-  }
-
   // Internal: Deserialize Protobuf message to object
-  private async deserialize(validation: ValidationResponse): Promise<IValidation> {
+  private deserialize(validation: ValidationResponse): IValidation {
     return {
       cookie: validation.getCookie(),
       data: validation.getData(),
