@@ -1,15 +1,22 @@
 import Table from 'cli-table3'
 import chalk from 'chalk'
 import Peer, { IPeer } from '../../models/Peer'
+import mongoose from 'mongoose'
 
 const showPeer = async (argv: any): Promise<void> => {
   if (argv.node_id) {
     const peer = await Peer.findOne({node_id: argv.node_id}).lean()
     if (peer) {
-      printPeer(peer)
+      await printPeer(peer)
+      await mongoose.disconnect()
     } else {
       console.error(`${chalk.red('Error:')} Peer not found: ${argv.node_id}`)
+      await mongoose.disconnect()
     }
+  }
+  else {
+    console.error(`${chalk.red('Error:')} Peer's Node ID is required.`)
+    await mongoose.disconnect()
   }
 }
 

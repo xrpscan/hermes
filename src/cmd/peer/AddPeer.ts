@@ -5,6 +5,7 @@ import chalk from 'chalk'
 import Peer, { IPeer } from '../../models/Peer'
 import PeerConnection from '../../models/PeerConnection'
 import { SYSTEM_CONFIG_ENDPOINT } from '../../lib/Constants'
+import mongoose from 'mongoose'
 
 const addPeer = async (argv: any): Promise<void> => {
   if (argv.url) {
@@ -22,12 +23,13 @@ const addPeer = async (argv: any): Promise<void> => {
       }
     } catch (error: any) {
       if (error.message) {
-        console.error(`Error: ${url} - ${error.message} `)
+        console.error(`${chalk.red('Error:')} ${url} - ${error.message} `)
       }
     }
   } else {
-    console.error('Error: System config url is required')
+    console.error(`${chalk.red('Error:')} System config url is required`)
   }
+  await mongoose.disconnect()
 }
 
 const printPeer = async (peer: IPeer): Promise<void> => {
@@ -52,7 +54,7 @@ const savePeer = async (peer: IPeer): Promise<void> => {
       await Peer.create(peer)
       console.log(`Added node ${peer.node_id} to peer list`)
     } catch (error: any) {
-      console.error(`Error: Failed to save node - ${error.message}`)
+      console.error(`${chalk.red('Error:')} Failed to save node - ${error.message}`)
     }
   }
 }

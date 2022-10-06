@@ -1,9 +1,11 @@
 import Peer, { IPeer } from '../../models/Peer'
 import Table from 'cli-table3'
+import mongoose from 'mongoose'
 
 const listPeer = async (): Promise<void> => {
-  Peer.find({}, '-_id -certificate -fingerprint', (error, peers) => {
-    printPeers(peers)
+  Peer.find({}, '-_id -certificate -fingerprint', async (error, peers) => {
+    await printPeers(peers)
+    await mongoose.disconnect()
   })
 }
 
