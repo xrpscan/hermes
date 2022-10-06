@@ -4,4 +4,5 @@ interface IServerInfo {
   fingerprint?: string | void
   rest_url?: string
   grpc_url?: string
+  version?: string
 }

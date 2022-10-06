@@ -1,6 +1,6 @@
 {
   "name": "hermes",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Project Hermes: XRPL Validation message service",
   "main": "index.js",
   "author": "Anurag",

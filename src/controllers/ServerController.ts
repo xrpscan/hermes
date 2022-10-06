@@ -22,6 +22,9 @@ ServerController.route('/config')
     if (ENV.SERVER_GRPC_ENABLED) {
       info.grpc_url = `${ENV.SERVER_HOSTNAME}:${ENV.SERVER_GRPC_PORT}`
     }
+    if (process.env.name && process.env.version) {
+      info.version = `${process.env.name}-${process.env.version}`
+    }
   }
   return res.json(info)
 })

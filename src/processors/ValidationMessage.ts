@@ -15,20 +15,16 @@ class ValidationMessage {
     this._signingPubKey = decodeNodePublic(validation.validation_public_key).toString('hex').toUpperCase()
   }
 
-  async create(): Promise<boolean>  {
+  create(): boolean  {
     if (this.verify()) {
-      try {
-        await Validation.create(this._validation)
-        return true
-      } catch (error) {
+      Validation.create(this._validation, (error, doc) => {
         if (error instanceof MongoServerError && error.code === 11000) {
-          logger.verbose(LOGPREFIX, `${error}`)
         }
-        else {
+        else if (error) {
           logger.error(LOGPREFIX, `${error}`)
         }
-        return false
-      }
+      })
+      return true
     }
     else {
       logger.verbose(LOGPREFIX, `Error: Signature verification failed for ${this._validation.validation_public_key}.${this._validation.ledger_index}`)
