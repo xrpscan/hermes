@@ -17,7 +17,7 @@ class ValidationMessage {
 
   create(): boolean  {
     if (this.verify()) {
-      Validation.create(this._validation, (error, doc) => {
+      Validation.create(this._validation, (error) => {
         if (error instanceof MongoServerError && error.code === 11000) {
         }
         else if (error) {
