@@ -14,12 +14,12 @@ const ingress = async () => {
     logger.info(LOGPREFIX, `Ingressing validation messages from ${ENV.RIPPLED_URL}`)
   })
 
-  xrplclient.on('validationReceived', async (validation) => {
+  xrplclient.on('validationReceived', (validation) => {
     try {
       // Ugly hack, because xrpl.ValidationStream does not have 'data' property.
       // https://github.com/XRPLF/xrpl.js/issues/2095
       const vm = new ValidationMessage( JSON.parse(JSON.stringify(validation)) )
-      await vm.create()
+      vm.create()
     } catch (error) {
       logger.error(LOGPREFIX, `${error}`)
     }
