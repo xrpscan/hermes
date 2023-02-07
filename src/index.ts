@@ -4,6 +4,7 @@ import ENV from './lib/ENV'
 import { startExpressServer } from './http'
 import { startgRPCServer } from './grpc/server'
 import { connectDatabase } from './db'
+import { scheduleOnlineDelete } from './processors/OnlineDelete'
 
 // Connect to mongodb
 connectDatabase()
@@ -26,4 +27,9 @@ if (ENV.INGRESS_ENABLED) {
 // Sync with peers and fetch validation messages
 if (ENV.PEERSYNC_ENABLED) {
   connectPeers()
+}
+
+// Run online_delete process if enabled
+if (ENV.ONLINE_DELETE) {
+  scheduleOnlineDelete()
 }

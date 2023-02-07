@@ -77,6 +77,15 @@ class ENV {
   public static get RIPPLED_URL(): string {
     return process.env.RIPPLED_URL || 'wss://xrplcluster.com'
   }
+  public static get ONLINE_DELETE(): number {
+    return process.env.ONLINE_DELETE ? Number(process.env.ONLINE_DELETE) : 0
+  }
+  public static get ONLINE_DELETE_INTERVAL(): number {
+    return process.env.ONLINE_DELETE_INTERVAL ? Number(process.env.ONLINE_DELETE_INTERVAL) : 3600 * 24
+  }
+  public static get ONLINE_DELETE_INTERVAL_MS(): number {
+    return this.ONLINE_DELETE_INTERVAL * 1000
+  }
   public static get SERVER_CERTIFICATE_DAYS(): string {
     return process.env.SERVER_CERTIFICATE_DAYS || '3650'
   }
