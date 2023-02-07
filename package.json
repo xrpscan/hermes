@@ -44,6 +44,7 @@
     "proto:build": "./bin/build-protos.sh",
     "dev": "concurrently 'npm run proto:build' 'npx tsc --watch' 'nodemon -q dist/index.js' ",
     "peer": "node dist/cmd/peer/index.js",
-    "keypair": "node dist/cmd/keypair/index.js"
+    "keypair": "node dist/cmd/keypair/index.js",
+    "online-delete": "node dist/cmd/online-delete/index.js"
   }
 }
