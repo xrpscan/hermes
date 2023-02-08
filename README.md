@@ -121,6 +121,27 @@ To remove a peer, run:
 $ npm run peer remove <node_id>
 ```
 
+### Maintenance
+
+XRP Ledger validators generate millions of validation messages every day. The online deletion feature lets the service delete validation messages from older ledgers to keep disk usage from rapidly growing over time. The default config lets the service store all validation messages indefinitely. In order to enable online deletion, set `ONLINE_DELETE` setting in `.env` file to the number of latest validated ledgers you wish to keep.
+
+![ONLINE_DELETE](https://github.com/xrpscan/hermes/blob/main/assets/online-delete.png?raw=true)
+
+```
+ONLINE_DELETE = 250000    # Store validations from the last 10 days approx
+```
+or
+```
+ONLINE_DELETE = 660000    # Store validations from the last 1 month approx
+```
+
+If needed, MongoDB collection may be compacted to free up disk space and return it back to the OS.
+
+```
+$ npm run online-delete compact
+[online-delete] Compact validations collection: 344 MB freed
+```
+
 ### Production notes
 
 These settings are recommended while running Hermes in production environment.
