@@ -179,7 +179,7 @@ And follow instructions printed by pm2. [Read more →](https://pm2.keymetrics.i
 
 ### Architecture
 
-![Hermes architecture](https://github.com/xrpscan/hermes/blob/main/assets/hermes-architecture.png?raw=true)
+![Hermes architecture](https://github.com/xrpscan/hermes/blob/main/assets/hermes-architecture-v2.png?raw=true)
 
 ### Known issues
 
