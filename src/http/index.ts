@@ -5,6 +5,7 @@ import http from 'node:http'
 import fs from 'node:fs'
 import express, { Express, Request, Response, NextFunction } from 'express'
 import ValidationController from '../controllers/ValidationController'
+import ValidatorController from '../controllers/ValidatorController'
 import PeerController from '../controllers/PeerController'
 import ServerController from '../controllers/ServerController'
 import PingController from '../controllers/PingController'
@@ -24,6 +25,8 @@ export const startExpressServer = () => {
   // Routes
   app.use('/api/v1/validation', ValidationController)
   app.use('/api/v1/validations', ValidationController)
+  app.use('/api/v1/validator', ValidatorController)
+  app.use('/api/v1/validators', ValidatorController)
   app.use('/api/v1/peers', PeerController)
   app.use('/api/v1/server', ServerController)
   app.use('/api/v1/ping', PingController)

@@ -3,6 +3,9 @@ import { verify_validation } from '../lib/VerifyValidation'
 import Validation, { IValidation } from '../models/Validation'
 import logger from '../logger'
 import { MongoServerError } from 'mongodb'
+import ValidatorRegistry from './ValidatorRegistry'
+import ENV from '../lib/ENV'
+
 
 const LOGPREFIX = '[validation-manager]'
 
@@ -19,11 +22,16 @@ class ValidationMessage {
     if (this.verify()) {
       Validation.create(this._validation, (error) => {
         if (error instanceof MongoServerError && error.code === 11000) {
+          logger.verbose(LOGPREFIX, `${error}`)
         }
         else if (error) {
           logger.error(LOGPREFIX, `${error}`)
         }
       })
+      if (this._validation.ledger_index % ENV.VALIDATOR_SAMPLE_INTERVAL === 0) {
+        const registry = new ValidatorRegistry(this._validation)
+        registry.refresh()
+      }
       return true
     }
     else {

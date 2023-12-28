@@ -9,6 +9,9 @@ class ENV {
       return 'info'
     }
   }
+  public static get VALIDATOR_SAMPLE_INTERVAL(): number {
+    return process.env.VALIDATOR_SAMPLE_INTERVAL ? Number(process.env.VALIDATOR_SAMPLE_INTERVAL) : 256
+  }
   public static get INGRESS_ENABLED(): boolean {
     return process.env.INGRESS_ENABLED === 'true' ? true : false
   }
